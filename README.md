@@ -12,3 +12,15 @@ Retrieve the raw [OIDC 1.0 provider metadata](https://openid.net/specs/openid-co
 
 ### Returns
 `Promise<RawProviderMetadata>`
+
+
+## `retrieveProviderMetadata(issuer, options?)`
+
+Retrieve the raw [OIDC 1.0 provider metadata](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata) for a given issuer URL and parse it into `ProviderMetadata`. Calls the standard metadata endpoint for the issuer then does basic parsing and validation to ensure that the metadata is valid.
+
+### Parameters
+- `issuer: string | URL`
+- `options?: Readonly<OidcDiscoveryOptions>`
+
+### Returns
+`Promise<ProviderMetadata>`
