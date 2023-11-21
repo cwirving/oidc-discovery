@@ -45,14 +45,22 @@ async function testNonObjectResponse(): Promise<void> {
 }
 
 Deno.test(
-  "Parses empty object responses",
+  "Parses minimal object responses",
   testParsesEmptyObjectResponse,
 );
 async function testParsesEmptyObjectResponse(): Promise<void> {
   const mockFetch = new MockFetch();
   using _ = deferClose(mockFetch);
 
-  const expected = "{}";
+  const expected: RawProviderMetadata = {
+    issuer: "",
+    authorization_endpoint: "",
+    token_endpoint: "",
+    jwks_uri: "",
+    response_types_supported: [],
+    subject_types_supported: [],
+    id_token_signing_alg_values_supported: [],
+  };
 
   mockFetch
     .intercept(
@@ -61,7 +69,7 @@ async function testParsesEmptyObjectResponse(): Promise<void> {
         method: "GET",
       },
     )
-    .response(expected, {
+    .response(JSON.stringify(expected), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
@@ -71,7 +79,7 @@ async function testParsesEmptyObjectResponse(): Promise<void> {
   );
 
   // The data passes through correctly
-  assertEquals(actual, JSON.parse(expected));
+  assertEquals(actual, expected);
 }
 
 Deno.test(
@@ -82,7 +90,15 @@ async function testResilientToTrailingSlash(): Promise<void> {
   const mockFetch = new MockFetch();
   using _ = deferClose(mockFetch);
 
-  const expected = "{}";
+  const expected: RawProviderMetadata = {
+    issuer: "",
+    authorization_endpoint: "",
+    token_endpoint: "",
+    jwks_uri: "",
+    response_types_supported: [],
+    subject_types_supported: [],
+    id_token_signing_alg_values_supported: [],
+  };
 
   mockFetch
     .intercept(
@@ -91,7 +107,7 @@ async function testResilientToTrailingSlash(): Promise<void> {
         method: "GET",
       },
     )
-    .response(expected, {
+    .response(JSON.stringify(expected), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
@@ -101,7 +117,7 @@ async function testResilientToTrailingSlash(): Promise<void> {
   );
 
   // The data passes through correctly
-  assertEquals(actual, JSON.parse(expected));
+  assertEquals(actual, expected);
 }
 
 Deno.test(
@@ -112,7 +128,24 @@ async function testSetsDefaults(): Promise<void> {
   const mockFetch = new MockFetch();
   using _ = deferClose(mockFetch);
 
-  const expected: Partial<RawProviderMetadata> = {
+  const response: RawProviderMetadata = {
+    issuer: "",
+    authorization_endpoint: "",
+    token_endpoint: "",
+    jwks_uri: "",
+    response_types_supported: [],
+    subject_types_supported: [],
+    id_token_signing_alg_values_supported: [],
+  };
+
+  const expected: RawProviderMetadata = {
+    issuer: "",
+    authorization_endpoint: "",
+    token_endpoint: "",
+    jwks_uri: "",
+    response_types_supported: [],
+    subject_types_supported: [],
+    id_token_signing_alg_values_supported: [],
     response_modes_supported: ["query", "fragment"],
     grant_types_supported: ["authorization_code", "implicit"],
     token_endpoint_auth_methods_supported: ["client_secret_basic"],
@@ -130,7 +163,7 @@ async function testSetsDefaults(): Promise<void> {
         method: "GET",
       },
     )
-    .response("{}", {
+    .response(JSON.stringify(response), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
@@ -152,7 +185,14 @@ async function testDefaultsOverride(): Promise<void> {
   const mockFetch = new MockFetch();
   using _ = deferClose(mockFetch);
 
-  const expected: Partial<RawProviderMetadata> = {
+  const expected: RawProviderMetadata = {
+    issuer: "",
+    authorization_endpoint: "",
+    token_endpoint: "",
+    jwks_uri: "",
+    response_types_supported: [],
+    subject_types_supported: [],
+    id_token_signing_alg_values_supported: [],
     response_modes_supported: [],
     grant_types_supported: [],
     token_endpoint_auth_methods_supported: [],
@@ -182,6 +222,23 @@ async function testDefaultsOverride(): Promise<void> {
 
   // The data passes through correctly
   assertEquals(actual, expected);
+}
+
+Deno.test("Rejects when passed an already-aborted signal", testRejectsOnSignal);
+async function testRejectsOnSignal(): Promise<void> {
+  const mockFetch = new MockFetch();
+  using _ = deferClose(mockFetch);
+
+  const aborted = AbortSignal.abort(new Error("***"));
+
+  await assertRejects(
+    () =>
+      retrieveRawProviderMetadata("http://does-not-exist.local", {
+        signal: aborted,
+      }),
+    Error,
+    "***",
+  );
 }
 
 Deno.test(

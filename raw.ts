@@ -2,8 +2,22 @@ import { OidcDiscoveryOptions } from "./options.ts";
 import { RawProviderMetadata } from "./provider-metadata.ts";
 
 /**
+ * These are the properties that must be present in a valid OIDC metadata response.
+ */
+const requiredProperties = [
+  "issuer",
+  "authorization_endpoint",
+  "token_endpoint",
+  "jwks_uri",
+  "response_types_supported",
+  "subject_types_supported",
+  "id_token_signing_alg_values_supported",
+];
+
+/**
  * Retrieve the raw OIDC provider metadata object for the given issuer. Does not validate
- * the response beyond ensuring that it is an object.
+ * the response beyond ensuring that it is an object and ensuring that the required properties
+ * are present. Property value *types* are not checked.
  * Throws exceptions from the underlying `fetch()` API, the `AbortSignal` passed in (if any) and
  * `TypeError` if the metadata response is not a JSON object.
  *
@@ -44,6 +58,14 @@ export async function retrieveRawProviderMetadata(
     Array.isArray(responseBody)
   ) {
     throw new TypeError("Provider metadata is not an object");
+  }
+
+  for (const key of requiredProperties) {
+    if (responseBody[key] === undefined) {
+      throw new TypeError(
+        `Required OIDC metadata response property "${key}" is missing`,
+      );
+    }
   }
 
   const rawMetadata = responseBody as RawProviderMetadata;

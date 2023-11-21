@@ -1,6 +1,10 @@
 {
   "version": "3",
+  "redirects": {
+    "https://deno.land/x/oidc_discovery/mod.ts": "https://deno.land/x/oidc_discovery@v0.9.1/mod.ts"
+  },
   "remote": {
+    "https://deno.land/std@0.161.0/encoding/base64.ts": "c57868ca7fa2fbe919f57f88a623ad34e3d970d675bdc1ff3a9d02bba7409db2",
     "https://deno.land/std@0.207.0/assert/_constants.ts": "8a9da298c26750b28b326b297316cdde860bc237533b07e1337c021379e6b2a9",
     "https://deno.land/std@0.207.0/assert/_diff.ts": "58e1461cc61d8eb1eacbf2a010932bf6a05b79344b02ca38095f9b805795dc48",
     "https://deno.land/std@0.207.0/assert/_format.ts": "a69126e8a469009adf4cf2a50af889aca364c349797e63174884a52ff75cf4c7",
@@ -39,6 +43,22 @@
     "https://deno.land/x/deno_mock_fetch@1.0.1/mock-interceptor.ts": "659014b78275a679fc4644d1f36ba486a27eaa7149c2f3f32fa34a2e7a085059",
     "https://deno.land/x/deno_mock_fetch@1.0.1/mock-scope.ts": "f7235b1efa7371b0698f0b5122eb82d042063411429585e4cdf740f2ae60af94",
     "https://deno.land/x/deno_mock_fetch@1.0.1/mock-utils.ts": "3a7b12704a75eee2e9721221c3da80bd70ab4f00fdbd1b786fb240f1be20b497",
-    "https://deno.land/x/deno_mock_fetch@1.0.1/mod.ts": "7ea9e35228454b578ff47d42602eba53de0174ffa4ca5567308b11384b55ddd7"
+    "https://deno.land/x/deno_mock_fetch@1.0.1/mod.ts": "7ea9e35228454b578ff47d42602eba53de0174ffa4ca5567308b11384b55ddd7",
+    "https://deno.land/x/oauth2_client@v1.0.2/mod.ts": "ea54c0a894d3303a80552ca65835b5b104d16415343b24e191f08e7f5db90ff7",
+    "https://deno.land/x/oauth2_client@v1.0.2/src/authorization_code_grant.ts": "36953750b75fb0a14fbf4e0e4bcc1d5ae0209d216d7b32f93a134b035ecf3d25",
+    "https://deno.land/x/oauth2_client@v1.0.2/src/client_credentials_grant.ts": "5bb9869925c5f5d11e8d66a86da37e2353107d57f57ec3a1480e197462e79be5",
+    "https://deno.land/x/oauth2_client@v1.0.2/src/errors.ts": "7603479b80386b5cc7e384c2af5f5262ed7c2123e4e297d9f21e95515f8a803a",
+    "https://deno.land/x/oauth2_client@v1.0.2/src/grant_base.ts": "86ae9eb3495f2304a634498fbb83741c5dc0e1357e02c40e12e212de5e9750f7",
+    "https://deno.land/x/oauth2_client@v1.0.2/src/implicit_grant.ts": "d5359aebbdaaff039c0d078890aa4ffa2869da19c521e535e15caf09c069e6b8",
+    "https://deno.land/x/oauth2_client@v1.0.2/src/oauth2_client.ts": "4e5ec26676661a3f69544826a4c27b30cc07dfcfc77f86981c324aaa53291a11",
+    "https://deno.land/x/oauth2_client@v1.0.2/src/pkce.ts": "d286a087cc8ef985b71a2bf391e9e9d86a78ac6d93e30c46e73006171aed0986",
+    "https://deno.land/x/oauth2_client@v1.0.2/src/refresh_token_grant.ts": "22cb1598e48fb037b4111a446573f7b48a3b361b58de58af17ba097221b12b54",
+    "https://deno.land/x/oauth2_client@v1.0.2/src/resource_owner_password_credentials.ts": "bd3df99d32eeebffb411c4a2d3c3d057395515fb41690a8d91460dd74b9bf466",
+    "https://deno.land/x/oauth2_client@v1.0.2/src/types.ts": "3327c2e81bc483e91843fb103595dd304393c3ac2a530d1c89200b6a5cf75e13",
+    "https://deno.land/x/oidc_discovery@v0.9.1/mod.ts": "3c642af267a0fd188e1ba013a6bd33eca21088552386e5e6b9c874a5d9924802",
+    "https://deno.land/x/oidc_discovery@v0.9.1/options.ts": "3ef9da017b0c8ef1e0796ed7924e3594bf3785ea2b70fb737dbdd94322a3ed4e",
+    "https://deno.land/x/oidc_discovery@v0.9.1/parsed.ts": "fefbbd3d2b79be2a53ae3f6f62c81e3172e1fddb1ba26ad74ca2568873eadac0",
+    "https://deno.land/x/oidc_discovery@v0.9.1/provider-metadata.ts": "b0cfca62c649db5429a1efe6381d7042d2a3f9405848427fed8bfd221aac3966",
+    "https://deno.land/x/oidc_discovery@v0.9.1/raw.ts": "ceeee98fd46d5fe5661c16aa2dc397bfe19235a240f90da7607bb6539a48f66a"
   }
 }
